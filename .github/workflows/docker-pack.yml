@@ -9,11 +9,11 @@ jobs:
         run: |
           docker pull mongo:6.0
           docker pull rabbitmq:3-management
-          docker pull openiap/opencore:latest
+          docker pull openiap/openflow:latest
           
       - name: Save images to tar archive
         run: |
-          docker save -o openiap_images.tar mongo:6.0 rabbitmq:3-management openiap/opencore:latest
+          docker save -o openiap_images.tar mongo:6.0 rabbitmq:3-management openiap/openflow:latest
           
       - name: Upload artifact for download
         uses: actions/upload-artifact@v4

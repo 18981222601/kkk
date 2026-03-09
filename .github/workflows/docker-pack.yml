@@ -1,0 +1,23 @@
+name: Build OpenIAP Offline Package
+on: workflow_dispatch
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Pull Docker images
+        run: |
+          docker pull mongo:6.0
+          docker pull rabbitmq:3-management
+          docker pull openiap/opencore:latest
+          
+      - name: Save images to tar archive
+        run: |
+          docker save -o openiap_images.tar mongo:6.0 rabbitmq:3-management openiap/opencore:latest
+          
+      - name: Upload artifact for download
+        uses: actions/upload-artifact@v4
+        with:
+          name: openiap-offline-package
+          path: openiap_images.tar
+          retention-days: 1
